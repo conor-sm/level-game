@@ -1,0 +1,20 @@
+# Ignore all files in a specific directory (e.g., /bulk_upload/)
+bulk_upload/*
+
+# Ignore all .log, .tmp, and .bak files
+*.log
+*.tmp
+*.bak
+
+# Ignore all files with no extension
+*
+
+# But keep these (if needed)
+!*.md
+!*.txt
+!README
+
+# Ignore everything except .gitignore itself
+# (useful if you want to clear everything and start fresh)
+*
+!.gitignore
