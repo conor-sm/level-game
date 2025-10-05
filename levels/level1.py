@@ -3,8 +3,11 @@ pygame.init()
 level1_map = [
     "                                                                                                    ",
     "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
     "                XX                                                                                  ",
-    "  P           X      XX       X                         XX                                          ",
+    "  P           X      XX       X                         XX                                         Y",
     "       XXXX               XX    XXXXXXXXXXXXXXXXXXXXX        XXXXXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX",
     "XXXXXXXXXXX                        XXXXXXXXXXXXXXXXXX           XXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX"
     ]
