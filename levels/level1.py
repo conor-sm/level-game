@@ -11,9 +11,10 @@ level1_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
-    "                XX                                                                                  ",
-    "  P           X      XX       X                         XX                                         Y",
-    "       XXXX               XX    XXXXXXXXXXXXXXXXXXXXX        XXXXXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX",
-    "XXXXXXXXXXX                        XXXXXXXXXXXXXXXXXX           XXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX"
+    "                                                                                                    ",
+    "                XX                                            X      XXXX                           ",
+    "  P           X      XX                                 XX                                         Y",
+    "         XX               XX    XXXXX   XXXXX    XXXX                        XXXX    XXXXXX   XXXXXX",
+    "XXXXXX                                                                                              "
     ]
     

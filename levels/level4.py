@@ -7,13 +7,14 @@ level4_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
-    "                                                                                                    ",
-    "                               XX                                                                   ",
+    "                                    XXX                                                             ",
+    "                                            XXXX                                                    ",
+    "                               XX                   X                                               ",
     "                     XX    X                                                                        ",
-    "                                     X                                                               ",
-    "                XX                       XXXX                                                       ",
-    "  P           X                                   XX    XX                                         Y",
-    "       XXXX                                                  XXXXXXXXXXXXXXXX   X    XXXXXX XXXXXXXX",
-    "XXXXXXXXXXX                                                     XXXXXXXXXXXXX        XXXXXX XXXXXXXX"
+    "                                                                                                    ",
+    "                XX                                                                                  ",
+    "  P           X                                         XX                                         Y",
+    "       XXXX                                                  XXXXXXX   XXXXXX   X    XXXXXX XXXXXXXX",
+    "XXXXXXX                                                                                             "
     ]
     
