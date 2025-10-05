@@ -144,9 +144,12 @@ class Game:
 class LevelManager:
     def __init__(self):
         self.level_index = 0
-        self.level_index_readable = self.level_index + 1
         self.level_names = ["level1", "level2", "level3", "level4", "level5"]
-    
+
+    @property
+    def level_index_readable(self):
+        return self.level_index + 1
+
     def get_current_level(self):
         return self.level_names[self.level_index]
     
@@ -205,7 +208,7 @@ def reset(level_name):
 
 game = Game()
 #######EDIfT LEVEL HERE
-game.load_level("level1")
+game.load_level(level_manager.get_current_level())
 game.map_setup()
 
 spawn_x, spawn_y = game.player_spawn
