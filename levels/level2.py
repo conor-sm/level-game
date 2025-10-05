@@ -1,17 +1,17 @@
 import pygame
 pygame.init()
-level1_map = [
+level2_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
+    "                               XX                                                                   ",
+    "                     XXX                                                                            ",
     "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                XX                                                                                  ",
-    "  P           X      XX       X                         XX                                         Y",
-    "       XXXX               XX    XXXXXXXXXXXXXXXXXXXXX        XXXXXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX",
-    "XXXXXXXXXXX                        XXXXXXXXXXXXXXXXXX           XXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX"
+    "                XX                       XXXX                                                       ",
+    "  P           X                                   XX    XX                                         Y",
+    "       XXXX                                                  XXXXXXXXXXXXXXXX   X    XXXXXX XXXXXXXX",
+    "XXXXXXXXXXX                                                     XXXXXXXXXXXXX        XXXXXX XXXXXXXX"
     ]
     
