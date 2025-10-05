@@ -1,6 +1,6 @@
 import pygame
 pygame.init()
-level1_map = [
+level3_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
@@ -10,10 +10,10 @@ level1_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
-    "                                                                                                    ",
-    "                XX                                                                                  ",
-    "  P           X      XX       X                         XX                                         Y",
-    "       XXXX               XX    XXXXXXXXXXXXXXXXXXXXX        XXXXXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX",
-    "XXXXXXXXXXX                        XXXXXXXXXXXXXXXXXX           XXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX"
+    "                                    XX                                                              ",
+    "                XX                X      XXXX                                                       ",
+    "  P           X                 X                 X     XX                                         Y",
+    "       XXXX                  XX                              XXXXXXXX    XXXX   X    XXXXXX XXXXXXXX",
+    "XXXXXXXXXXX         X  X                                        XXXXX    XXX         XXXXXX XXXXXXXX"
     ]
     
