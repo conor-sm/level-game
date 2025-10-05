@@ -1,20 +1,21 @@
 import pygame
 pygame.init()
-level2_map = [
+level8_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
+    "        XX      XX  X     XX     XX      XX      X       XX   X    XX                               ",
     "                                                                                                    ",
+    "  X                                                                         XXX                     ",
+    "   X                                                                                                ",
+    "       X                                                                                            ",
+    "           X                                                            XX                          ",
     "                                                                                                    ",
-    "                                                                                                    ",
-    "                            XXXXX                                                                   ",
-    "                     XXX                                                                            ",
-    "                                     X                                                              ",
-    "                XX                       XXXX                                                       ",
-    "  P           X                                   XX    XX                                         Y",
-    "       XXXX                                                  XXXXXX    XXXXXX   X    XXXXXX XXXXXXXX",
+    "                XX                                                                                  ",
+    "  P           X                                                                      XX     X      Y",
+    "       XXXX                                                                    XXXX           X   XX",
     "XXXXXXX                                                                                             "
     ]
     

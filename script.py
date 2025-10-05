@@ -6,25 +6,45 @@ menu_active = True
 game_over = False
 game_active = False
 game_won = False
+won_sound_played = False
 
-large_font = pygame.font.Font("data/font.ttf", 32)
-small_font = pygame.font.Font("data/font.ttf", 24)
+large_font = pygame.font.Font("data/font.ttf", 48)
+small_font = pygame.font.Font("data/font.ttf", 32)
+
+game_over_sound = pygame.mixer.Sound("data/game-over.wav")
+portal_sound = pygame.mixer.Sound("data/portal.ogg")
+start_sound = pygame.mixer.Sound("data/jump.ogg")
+won_sound = pygame.mixer.Sound("data/start.ogg")
+
+BLOCK_IMAGE = pygame.transform.scale(pygame.image.load("data/block.png"), (32, 32))
+IDLE_IMAGE = pygame.transform.scale(pygame.image.load("data/idle.png"), (32, 32))
+PORTAL_IMAGE = pygame.transform.scale(pygame.image.load("data/portal.png"), (32, 32))
+
+def gen_random_insult():
+    insults = ["Caught in 4k", "Shot on iPhone", "Did you get that on camera?", "Dissapointing", "Better luck next time", "Sad", "You can do better", "The frost has gotten to you"]
+    insult = random.choice(insults)
+    return insult
+
+random_insult = gen_random_insult()
 
 class Tile(pygame.sprite.Sprite):
     def __init__(self, x, y, tile_type):
         super().__init__()
         self.image = pygame.Surface((32, 32))
-        self.image.fill((100, 200, 100))
+        self.block_image = BLOCK_IMAGE
+        self.portal_image = PORTAL_IMAGE
         self.rect = self.image.get_rect(topleft=(x, y))
         self.original_x = x
         self.original_y = y
         self.tile_type = tile_type
 
         if self.tile_type == "X":
-            self.image.fill((105, 169, 194))
+            self.image = self.block_image
+            self.rect = self.image.get_rect(topleft=(x,y))
 
         elif self.tile_type == "Y":
-            self.image.fill((200, 0, 0))
+            self.image = self.portal_image
+            self.rect = self.image.get_rect(topleft=(x, y))
 
     def update(self, camera_offset_x):
         self.rect.x = self.original_x - camera_offset_x
@@ -33,11 +53,11 @@ class Tile(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.transform.scale((pygame.image.load("data/idle.png")), (32, 32))
+        self.image = IDLE_IMAGE
         self.rect = self.image.get_rect()
         self.x = 0
         self.y = 100
-        self.jump_strength = 12
+        self.jump_strength = 11.5
         self.gravity = 0.7
         self.velocity_y = 0
         self.velocity_x = 6
@@ -82,6 +102,7 @@ class Player(pygame.sprite.Sprite):
         self.collided_tiles = pygame.sprite.spritecollide(self, tile_group, False)
         for tile in self.collided_tiles:
             if tile.tile_type == "Y":
+                portal_sound.play()
                 next_level = level_manager.increase_level()
                 if next_level:
                     reset(next_level)
@@ -95,9 +116,12 @@ class Player(pygame.sprite.Sprite):
                 break
         else:
             self.on_ground = False
-            if self.y > 480:
+            if self.y > 512:
+                global random_insult
                 game_active = False
                 game_over = True
+                game_over_sound.play()
+                random_insult = gen_random_insult()
 
     def jump(self):
         if self.on_ground:
@@ -108,10 +132,10 @@ class Player(pygame.sprite.Sprite):
 
 class Game:
     def __init__(self):
-        self.WIDTH, self.HEIGHT = 680, 480
+        self.WIDTH, self.HEIGHT = 680, 512
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        self.background = pygame.transform.scale((pygame.image.load("data/background.png")), (680, 480))
+        self.background = pygame.transform.scale((pygame.image.load("data/background.png")), (680, 512))
 
         self.tile_group = pygame.sprite.Group()
 
@@ -142,7 +166,7 @@ class Game:
 class LevelManager:
     def __init__(self):
         self.level_index = 0
-        self.level_names = ["level1", "level2", "level3", "level4", "level5", "level6"]
+        self.level_names = ["level1", "level2", "level3", "level4", "level5", "level6", "level7", "level8"]
 
     @property
     def level_index_readable(self):
@@ -162,6 +186,11 @@ class LevelManager:
 
 level_manager = LevelManager()
 def menu():
+    game.screen.blit(game.background, (0, 0))
+    menu_text = large_font.render("Penguin: The Final Frost", True, (0, 0, 0))
+    menu_prompt = small_font.render("ENTER at your own risk...", True, (0, 0, 0))
+    game.screen.blit(menu_text, ((game.WIDTH - menu_text.get_width()) // 2, (game.HEIGHT - menu_text.get_height()) // 2 - 50))
+    game.screen.blit(menu_prompt, ((game.WIDTH - menu_prompt.get_width()) // 2, (game.HEIGHT - menu_prompt.get_height()) // 2))
     pygame.display.update()
     game.clock.tick(60)
 
@@ -179,14 +208,25 @@ def game_loop():
     pygame.display.update()
 
 def game_over_function():
-    print("Game Over Function")
-    game.screen.fill((255,0,0))
+    global random_insult
+    game.screen.blit(game.background, (0, 0))
+    game_over_text = large_font.render(f"{random_insult}", True, (0, 0, 0))
+    game_over_prompt = small_font.render("ENTER to retry...", True, (0, 0, 0))
+    game.screen.blit(game_over_text, ((game.WIDTH - game_over_text.get_width()) // 2, (game.HEIGHT - game_over_text.get_height()) // 2 - 50))
+    game.screen.blit(game_over_prompt, ((game.WIDTH - game_over_prompt.get_width()) // 2, (game.HEIGHT - game_over_prompt.get_height()) // 2))
     pygame.display.update()
     game.clock.tick(60)
 
 def game_won_function():
-    print("Game Won Function")
-    game.screen.fill((0, 255, 0))
+    game.screen.blit(game.background, (0, 0))
+    game_won_text = large_font.render("You have won. Congratulations!", True, (0, 0, 0))
+    game_won_prompt = small_font.render("thank you for playing", True, (0, 0, 0))
+    game.screen.blit(game_won_text, ((game.WIDTH - game_won_text.get_width()) // 2, (game.HEIGHT - game_won_text.get_height()) // 2 - 50))
+    game.screen.blit(game_won_prompt, ((game.WIDTH - game_won_prompt.get_width()) // 2, (game.HEIGHT - game_won_prompt.get_height()) // 2))
+    if not won_sound_played:
+        won_sound.play()
+        won_sound_played = True
+
     pygame.display.update()
     game.clock.tick(60)
 
@@ -221,6 +261,7 @@ while running:
             if event.key == pygame.K_RETURN and menu_active:
                 menu_active = False
                 game_active = True
+                start_sound.play()
             if event.key == pygame.K_RETURN and game_over:
                 game_over = False
                 reset(level_manager.get_current_level())
