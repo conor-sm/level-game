@@ -1,6 +1,6 @@
 import pygame
 pygame.init()
-level1_map = [
+level5_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
@@ -9,11 +9,11 @@ level1_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                XX                                                                                  ",
-    "  P           X      XX       X                         XX                                         Y",
-    "       XXXX               XX    XXXXXXXXXXXXXXXXXXXXX        XXXXXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX",
-    "XXXXXXXXXXX                        XXXXXXXXXXXXXXXXXX           XXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX"
+    "                                                         X                                          ",
+    "                                                     XX                                             ",
+    "                XX  X   X    X     X     X    XXXX                                                  ",
+    "  P           X                                                                                    Y",
+    "       X  X                                                X  XXXXXXXXXXXXXXX   X    XXXXXX XXXXXXXX",
+    "XXXXXXXX XX                                                     XXXXXXXXXXXXX        XXXXXX XXXXXXXX"
     ]
     

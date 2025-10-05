@@ -21,7 +21,7 @@ class Tile(pygame.sprite.Sprite):
         self.tile_type = tile_type
 
         if self.tile_type == "X":
-            self.image.fill((0, 200, 0))
+            self.image.fill((105, 169, 194))
 
         elif self.tile_type == "Y":
             self.image.fill((200, 0, 0))
@@ -33,13 +33,12 @@ class Tile(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface((32, 32))
-        self.image.fill((200, 100, 100))
+        self.image = pygame.transform.scale((pygame.image.load("data/idle.png")), (32, 32))
         self.rect = self.image.get_rect()
         self.x = 0
         self.y = 100
         self.jump_strength = 12
-        self.gravity = 0.6
+        self.gravity = 0.7
         self.velocity_y = 0
         self.velocity_x = 6
         self.acceleration_x = 0
@@ -84,7 +83,8 @@ class Player(pygame.sprite.Sprite):
         for tile in self.collided_tiles:
             if tile.tile_type == "Y":
                 next_level = level_manager.increase_level()
-                reset(next_level)
+                if next_level:
+                    reset(next_level)
                 return
 
             if self.velocity_y > 0:
@@ -95,7 +95,7 @@ class Player(pygame.sprite.Sprite):
                 break
         else:
             self.on_ground = False
-            if self.y > 384:
+            if self.y > 480:
                 game_active = False
                 game_over = True
 
@@ -108,15 +108,13 @@ class Player(pygame.sprite.Sprite):
 
 class Game:
     def __init__(self):
-        #regular stuff
-        self.WIDTH, self.HEIGHT = 680, 384
+        self.WIDTH, self.HEIGHT = 680, 480
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        self.background = pygame.transform.scale((pygame.image.load("data/background.png")), (680, 480))
 
-        #tile stuff
         self.tile_group = pygame.sprite.Group()
 
-        #camera stuff
         self.camera_offset_x = 0
 
     def load_level(self, level_name):
@@ -144,7 +142,7 @@ class Game:
 class LevelManager:
     def __init__(self):
         self.level_index = 0
-        self.level_names = ["level1", "level2", "level3", "level4", "level5"]
+        self.level_names = ["level1", "level2", "level3", "level4", "level5", "level6"]
 
     @property
     def level_index_readable(self):
@@ -159,38 +157,38 @@ class LevelManager:
         if self.level_index >= len(self.level_names):
             game_active = False
             game_won = True
+            return None
         return self.get_current_level()
 
 level_manager = LevelManager()
 def menu():
-    print(f"MENU: Level: {level_manager.get_current_level()}")
     pygame.display.update()
-    game.clock.tick(80)
+    game.clock.tick(60)
 
 def game_loop():
-    game.screen.fill((0, 0, 0))
+    game.screen.blit(game.background, (0, 0) )
     for tile in game.tile_group:
         tile.update(game.camera_offset_x)
     game.tile_group.draw(game.screen)
     game.camera_offset_x = player.x - game.WIDTH // 2
     player.draw(game.screen, game.camera_offset_x)
     player.update(game.tile_group, game.camera_offset_x)
-    level_prompt = small_font.render(f"Level: {level_manager.level_index_readable}", True, (255, 255, 255))
+    level_prompt = small_font.render(f"Level: {level_manager.level_index_readable}", True, (0, 0, 0))
     game.screen.blit(level_prompt, (5, 5))
-    game.clock.tick(80)
+    game.clock.tick(60)
     pygame.display.update()
 
 def game_over_function():
     print("Game Over Function")
     game.screen.fill((255,0,0))
     pygame.display.update()
-    game.clock.tick(80)
+    game.clock.tick(60)
 
 def game_won_function():
     print("Game Won Function")
     game.screen.fill((0, 255, 0))
     pygame.display.update()
-    game.clock.tick(80)
+    game.clock.tick(60)
 
 def reset(level_name):
     game.tile_group.empty()
@@ -207,7 +205,6 @@ def reset(level_name):
     game.camera_offset_x = 0
 
 game = Game()
-#######EDIfT LEVEL HERE
 game.load_level(level_manager.get_current_level())
 game.map_setup()
 
@@ -217,7 +214,6 @@ player.x, player.y = spawn_x, spawn_y
 player.rect.topleft = (player.x, player.y)
 
 while running:
-    print(f"game: {game_active} | menu: {menu_active} | game over: {game_over}")
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False

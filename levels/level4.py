@@ -1,6 +1,6 @@
 import pygame
 pygame.init()
-level1_map = [
+level4_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
@@ -8,12 +8,12 @@ level1_map = [
     "                                                                                                    ",
     "                                                                                                    ",
     "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                XX                                                                                  ",
-    "  P           X      XX       X                         XX                                         Y",
-    "       XXXX               XX    XXXXXXXXXXXXXXXXXXXXX        XXXXXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX",
-    "XXXXXXXXXXX                        XXXXXXXXXXXXXXXXXX           XXXXXXXXXXXXXXXXX    XXXXXXXXXXXXXXX"
+    "                               XX                                                                   ",
+    "                     XX    X                                                                        ",
+    "                                     X                                                               ",
+    "                XX                       XXXX                                                       ",
+    "  P           X                                   XX    XX                                         Y",
+    "       XXXX                                                  XXXXXXXXXXXXXXXX   X    XXXXXX XXXXXXXX",
+    "XXXXXXXXXXX                                                     XXXXXXXXXXXXX        XXXXXX XXXXXXXX"
     ]
     
