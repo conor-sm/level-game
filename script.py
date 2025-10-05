@@ -218,6 +218,7 @@ def game_over_function():
     game.clock.tick(60)
 
 def game_won_function():
+    global won_sound_played
     game.screen.blit(game.background, (0, 0))
     game_won_text = large_font.render("You have won. Congratulations!", True, (0, 0, 0))
     game_won_prompt = small_font.render("thank you for playing", True, (0, 0, 0))
